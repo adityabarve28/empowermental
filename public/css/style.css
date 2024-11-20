@@ -1,0 +1,632 @@
+*, a{
+    text-transform: capitalize !important;
+}
+html {
+    scroll-behavior: smooth !important;
+}
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  img[loading="lazy"]:not([src=""]) {
+    opacity: 1;
+  }
+  
+/* Sec-top */
+.sec-full-len{
+    background-color: rgb(0 0 0 / 90%); /* Darker background */
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh; /* Full screen height */
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
+    position: relative; /* Position relative for overlay */
+    overflow: hidden; /* Prevent overflow */
+    text-align: center; /* Center align text */
+    backdrop-filter: blur(5px); /* Add blur effect */
+}
+
+.sec-full-len::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(23, 23, 23, 0.7); /* White overlay with 50% opacity */
+    backdrop-filter: blur(5px); /* Apply blur to the background */
+    z-index: 0; /* Ensure overlay is behind the content */
+}
+.sec-full-len > * {
+    z-index: 1; /* Place content above overlay */
+    color: #ffffff; /* Change text color for visibility */
+}
+/* Style for view all blogs */
+.sec-full-len-vab{
+    background-color: rgb(0 0 0 / 90%); /* Darker background */
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    height: wrap-content; /* Full screen height */
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
+    position: relative; /* Position relative for overlay */
+    overflow: hidden; /* Prevent overflow */
+    text-align: center; /* Center align text */
+    backdrop-filter: blur(5px); /* Add blur effect */
+}
+
+.sec-full-len-vab::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(23, 23, 23, 0.7); /* White overlay with 50% opacity */
+    backdrop-filter: blur(5px); /* Apply blur to the background */
+    z-index: 0; /* Ensure overlay is behind the content */
+}
+.sec-full-len-vab > * {
+    z-index: 1; /* Place content above overlay */
+    color: #ffffff; /* Change text color for visibility */
+}
+/* Navbar base styles */
+.navbar {
+    background-color: #707B72;
+    text-transform: capitalize;
+}
+
+.navbar-nav .nav-link {
+    color: transparent; /* Hide the static text */
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Pseudo-elements for the transition effect */
+.navbar-nav .nav-link::before,
+.navbar-nav .nav-link::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+/* Initial state of the elements */
+.navbar-nav .nav-link::before {
+    color: #fadd65;
+    background-color: transparent;
+    z-index: 1;
+}
+
+.navbar-nav .nav-link::after {
+    color: #FFB84D;
+    background-color: transparent;
+    transform: translate(-50%, 150%);
+    z-index: 0;
+    opacity: 0; /* Initially hidden */
+}
+
+/* Hover effect */
+.navbar-nav .nav-link:hover::before {
+    transform: translate(-50%, -150%);
+    opacity: 0; /* Hide static text */
+}
+
+.navbar-nav .nav-link:hover::after {
+    transform: translate(-50%, -50%);
+    opacity: 1; /* Show animated text */
+}
+
+/* Dropdown menu styles */
+.navbar-nav .dropdown-menu {
+    background-color: #707B72;
+    border: none;
+    display: none; /* Initially hidden */
+}
+
+/* Show dropdown on hover */
+.navbar-nav .dropdown:hover .dropdown-menu {
+    display: block; /* Show dropdown items on hover */
+}
+
+.navbar-nav .dropdown-item {
+    color: #fadd65 !important; 
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .dropdown-item:hover {
+    background-color: #FFB84D;
+    color: #ffffff !important; 
+}
+
+.navbar-toggler-icon {
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    background-image: url(../images/logo.png);
+}
+
+/* Sec-aboutus */
+.sec-about {
+    padding: 50px 0;
+}
+
+.sec-about h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.abouttext {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.slider-image{
+    height: 250px !important;
+    width: 300px !important;
+}
+
+/* Alternating alignment */
+.abouttext:nth-child(odd) {
+    text-align: left;
+}
+
+.abouttext:nth-child(even) {
+    text-align: right;
+}
+
+/* Card Style */
+.card {
+    margin: 20px 0;
+}
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #111;
+}
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    color: #111;
+}
+
+.faq-section {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.faq-section:hover {
+    transform: scale(1.02);
+}
+
+.faq-content {
+    display: none;
+    padding: 10px;
+    border-top: 1px solid #d6d8db;
+    margin-top: 10px;
+}
+
+/* Login Style */
+.bg-fullscreen {
+    background-color: rgb(0 0 0 / 90%); 
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    height: 100vh; /* Full screen height */
+}
+.jumbotron-opaque {
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 20px; 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    width: 100%; 
+    max-width: 400px;
+    margin: 0 auto; /* Center horizontally */
+    text-align: center; /* Align text to the left inside the form */
+}
+
+/* Signup style */
+.bg-fullscreenn {
+    background-image: url("../images/logo.png");
+    background-color: rgb(0 0 0 / 90%);
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-size: 200px; */
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.jumbotron-opaquee {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    height: 100vh max-content;
+}
+
+/* Hidden fields */
+.hidden {
+    display: none;
+}
+
+/* How it works */
+.container-hiw {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* White background with opacity */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+    z-index: 2; /* Ensure content is above background */
+}
+
+.h1, .h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #007bff;
+}
+
+.step {
+    margin-bottom: 30px;
+}
+
+.step h3 {
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+.benefits {
+    background-color: #e9ecef;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-left: 5px solid #007bff;
+}
+
+.btn-register{
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-register:hover {
+    background-color: #0056b3;
+}
+
+/* Background styling */
+.body-hiw {
+    background-color: rgb(0 0 0 / 90%); /* Darker background */
+    background-image: url('../images/logo.png'); /* Background image */
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh; /* Full screen height */
+    backdrop-filter: blur(5px); /* Add blur effect */
+}
+
+/* Subscription Plans */
+.container-plans {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffd932;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+    background-image: url('../images/logo.png'); /* Background image */
+    background-repeat: no-repeat;
+    background-position: center;
+    backdrop-filter: blur(5px);
+    /* opacity: 0.5; */
+    z-index: 2;
+}
+
+.h1-subs {
+    text-align: center;
+    margin-bottom: 50px;
+    color: #ffffff !important;
+}
+
+.plan-card {
+    background-color: #020403; /* White background with opacity */
+    height: 95%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.plan-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.plan-card .card-header {
+    background-color: #5b1a8e ;
+    color: #14342c;
+    padding: 20px;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.plan-card .card-body {
+    padding: 20px;
+    color: #00FF00;
+}
+
+.plan-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.plan-card ul li {
+    margin: 10px 0;
+}
+
+.btn-chplan {
+    background-color:  #ffdc87;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    border-radius: 50px;
+    color: #14342c;
+}
+
+.btn-btnchplan:hover {
+    background-color: #0056b3;
+}
+
+/* Background styling */
+.body-plans {
+    background-color: rgb(0 0 0 / 90%) !important;
+    background-image: url('../images/logo.png'); /* Background image */
+    background-repeat: no-repeat;
+    background-position: center;
+    backdrop-filter: blur(5px); /* Add blur effect */
+}
+
+/* Services style */
+.sec-ser{
+    background-color: rgb(0 0 0 / 90%); /* Darker background */
+    background-image: url('../images/logo.png'); /* Background image */
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh; /* Full screen height */
+    backdrop-filter: blur(5px); /* Add blur effect */
+}
+
+/* getting started */
+/* Container for getting started content */
+.container-getting-started {
+    width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Same as How It Works */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Header styling */
+.h1-gs {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #007bff; /* Consistent color with How It Works */
+}
+
+/* Step sections */
+.step-gs {
+    margin-bottom: 30px;
+}
+
+.step-gs h3 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+/* Button styling */
+.btn-register {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-register:hover {
+    background-color: #0056b3;
+}
+
+/* Background styling */
+.body-getting-started {
+    background-color: rgb(0 0 0 / 90%);
+    background-image: url('../images/logo.png'); /* Background image */
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    backdrop-filter: blur(5px);
+}
+
+/* Resources */
+/* Container for resources content */
+.container-resources {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Header styling */
+.h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #007bff;
+}
+
+/* Resource section */
+.resource-section {
+    margin-bottom: 30px;
+}
+
+.resource-section h3 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+/* List styling for resources */
+.resource-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.resource-list li {
+    margin-bottom: 10px;
+}
+
+.resource-list a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.resource-list a:hover {
+    text-decoration: underline;
+}
+
+/* Background styling */
+.body-resources {
+    background-color: rgb(0 0 0 / 90%);
+    background-image: url('../images/logo.png'); /* Same background image */
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    backdrop-filter: blur(5px);
+}
+
+/* Ask for help */
+/* Container for help form */
+.container-help {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* White background with opacity */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Header styling */
+.h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #007bff;
+}
+
+/* Submit button styling */
+.btn-submit {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+/* Background styling */
+.body-askforhelp {
+    background-color: rgb(0 0 0 / 90%); /* Darker background */
+    background-image: url('../images/logo.png'); /* Background image */
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh; /* Full screen height */
+    backdrop-filter: blur(5px); /* Add blur effect */
+}
+
+/* Subscription image */
+/* Center the image and add padding */
+.qr-image-container {
+    padding: 15px;
+    text-align: center;
+}
+
+.qr-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 100%; /* Adjust as needed for modal size */
+    border-radius: 8px; /* Optional rounded corners */
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Scrollable modal body */
+.modal-body-scrollable {
+    max-height: 400px; /* Adjust height as needed */
+    overflow-y: auto;
+    padding-right: 15px; /* Optional: add padding for scrollbar space */
+}
+
+/* .qr-image {
+    max-width: 100%;
+    max-height: 150px; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+} */
