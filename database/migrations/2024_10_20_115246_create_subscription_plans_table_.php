@@ -14,13 +14,14 @@ class CreateSubscriptionPlansTable extends Migration
     public function up()
     {
         Schema::create('subscription_plans', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->decimal('price', 8, 2);
-            $table->string('duration')->default('monthly');
-            $table->text('features'); // You can store features as a JSON or text format
-            $table->decimal('discount')->nullable();
-            $table->timestamps();
+            $table->id(); // bigint unsigned AUTO_INCREMENT
+            $table->string('name'); // varchar(255) NOT NULL
+            $table->decimal('price', 8, 2); // decimal(8,2) NOT NULL
+            $table->string('duration')->default('monthly'); // varchar(255) with a default value of 'monthly'
+            $table->text('features'); // text NOT NULL
+            $table->integer('sessions_approved'); // int NOT NULL
+            $table->decimal('discount', 8, 2)->nullable(); // decimal(8,2) for discount, can be NULL
+            $table->timestamps(); // created_at and updated_at as timestamps
         });
     }
 

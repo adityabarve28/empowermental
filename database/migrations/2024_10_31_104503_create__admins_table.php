@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('_admins', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('password');
-            $table->string('level')->nullable();
-            $table->timestamps();
+            $table->id(); // Bigint unsigned AUTO_INCREMENT PRIMARY KEY
+            $table->string('name'); // Name column (varchar(255))
+            $table->string('email')->unique(); // Email column (varchar(255)) with unique constraint
+            $table->string('password'); // Password column (varchar(255))
+            $table->string('level')->nullable(); // Level column (varchar(255)) and nullable
+            $table->timestamps(); // Created_at and updated_at columns
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_admins');
+        Schema::dropIfExists('_admins'); // Drop the _admins table
     }
 };

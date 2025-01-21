@@ -14,17 +14,18 @@ class CreateReportsTable extends Migration
     public function up()
     {
         Schema::create('reports', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('counselor_id')->nullable();
-            $table->unsignedBigInteger('institute_id')->nullable();
-            $table->text('report_details');
-            $table->timestamps();
+            $table->id(); // bigint unsigned AUTO_INCREMENT
+            $table->unsignedBigInteger('student_id')->nullable(); // bigint unsigned DEFAULT NULL
+            $table->unsignedBigInteger('counselor_id')->nullable(); // bigint unsigned DEFAULT NULL
+            $table->unsignedBigInteger('institute_id')->nullable(); // bigint unsigned DEFAULT NULL
+            $table->text('report_details')->collation('utf8mb4_unicode_ci'); // text COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->timestamp('created_at')->nullable(); // timestamp NULL DEFAULT NULL
+            $table->timestamp('updated_at')->nullable(); // timestamp NULL DEFAULT NULL
 
-            // Foreign keys
-            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('counselor_id')->references('id')->on('counselors')->onDelete('cascade');
-            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
+            // Foreign key constraints
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade'); // FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE
+            $table->foreign('counselor_id')->references('id')->on('counselors')->onDelete('cascade'); // FOREIGN KEY (counselor_id) REFERENCES counselors(id) ON DELETE CASCADE
+            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade'); // FOREIGN KEY (institute_id) REFERENCES institutes(id) ON DELETE CASCADE
         });
     }
 

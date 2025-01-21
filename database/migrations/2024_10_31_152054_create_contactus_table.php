@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contactus', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('message');
-            $table->timestamps();
+            $table->id(); // bigint unsigned NOT NULL AUTO_INCREMENT
+            $table->string('name'); // varchar(255) NOT NULL
+            $table->string('email'); // varchar(255) NOT NULL
+            $table->string('message'); // varchar(255) NOT NULL
+            $table->timestamps(); // created_at and updated_at timestamps
         });
     }
 

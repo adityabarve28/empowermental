@@ -14,17 +14,17 @@ class CreateWorkshopsTable extends Migration
     public function up()
     {
         Schema::create('workshops', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->date('date');
-            $table->unsignedBigInteger('institute_id')->nullable();
-            $table->unsignedBigInteger('counselor_id')->nullable();
-            $table->timestamps();
+            $table->id(); // bigint unsigned AUTO_INCREMENT
+            $table->string('title'); // varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->text('description')->collation('utf8mb4_unicode_ci'); // text COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->date('date'); // date NOT NULL
+            $table->unsignedBigInteger('institute_id')->nullable(); // bigint unsigned DEFAULT NULL
+            $table->unsignedBigInteger('counselor_id')->nullable(); // bigint unsigned DEFAULT NULL
+            $table->timestamps(); // created_at, updated_at as timestamps
 
-            // Foreign keys
-            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
-            $table->foreign('counselor_id')->references('id')->on('counselors')->onDelete('cascade');
+            // Foreign key constraints
+            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade'); // FOREIGN KEY (institute_id) REFERENCES institutes(id) ON DELETE CASCADE
+            $table->foreign('counselor_id')->references('id')->on('counselors')->onDelete('cascade'); // FOREIGN KEY (counselor_id) REFERENCES counselors(id) ON DELETE CASCADE
         });
     }
 

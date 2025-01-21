@@ -14,20 +14,24 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->unsignedBigInteger('user_id'); // Foreign key to users table
-            $table->unsignedBigInteger('institute_id'); // Foreign key to institutes table
-            $table->string('student_number')->unique(); // Unique student number
-            $table->date('dob'); // Date of birth
-            $table->string('gender'); // Gender
-            $table->string('phone')->nullable(); // Phone number
-            $table->string('address')->nullable(); // Address
-            $table->unsignedInteger('year_of_study'); // Year of study
-            $table->timestamps();
+            $table->id(); // bigint unsigned AUTO_INCREMENT
+            $table->unsignedBigInteger('user_id'); // bigint unsigned NOT NULL
+            $table->text('name')->collation('utf8mb4_unicode_ci'); // text COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->text('email')->collation('utf8mb4_unicode_ci'); // text COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->text('password')->collation('utf8mb4_unicode_ci'); // text COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->unsignedBigInteger('institute_id'); // bigint unsigned NOT NULL
+            $table->integer('is_account_manager')->nullable(); // int DEFAULT NULL
+            $table->date('dob'); // date NOT NULL
+            $table->string('gender', 255)->collation('utf8mb4_unicode_ci'); // varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->string('phone', 255)->collation('utf8mb4_unicode_ci')->nullable(); // varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+            $table->string('address', 255)->collation('utf8mb4_unicode_ci')->nullable(); // varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+            $table->unsignedInteger('year_of_study'); // int unsigned NOT NULL
+            $table->timestamp('created_at')->nullable(); // timestamp NULL DEFAULT NULL
+            $table->timestamp('updated_at')->nullable(); // timestamp NULL DEFAULT NULL
 
-            // Foreign key constraints
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
+            // Indexes and foreign key constraints
+            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade'); // FOREIGN KEY (institute_id) REFERENCES institutes(id) ON DELETE CASCADE
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // FOREIGN KEY (user_id) REFERENCES users(id)
         });
     }
 

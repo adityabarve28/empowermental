@@ -14,22 +14,23 @@ class CreateInstitutesTable extends Migration
     public function up()
     {
         Schema::create('institutes', function (Blueprint $table) {
-            $table->id();
-            $table->string('institute_name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('phone');
-            $table->string('registration_number')->unique();
-            $table->string('address');
-            $table->string('website')->nullable();
-            $table->string('type');
-            $table->string('principal_name');
-            $table->integer('establishment_year');
-            $table->integer('number_of_students');
-            $table->text('affiliations')->nullable();
-            $table->string('logo')->nullable();
-            $table->text('mission_statement')->nullable();
-            $table->timestamps();
+            $table->id(); // bigint unsigned AUTO_INCREMENT
+            $table->string('institute_name', 255)->collation('utf8mb4_unicode_ci'); // varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->string('ins_email', 255)->collation('utf8mb4_unicode_ci')->unique(); // varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->string('ins_password', 255)->collation('utf8mb4_unicode_ci'); // varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->string('ins_phone', 255)->collation('utf8mb4_unicode_ci'); // varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->string('registration_number', 255)->collation('utf8mb4_unicode_ci')->unique(); // varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->string('ins_address', 255)->collation('utf8mb4_unicode_ci'); // varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->string('website', 255)->collation('utf8mb4_unicode_ci')->nullable(); // varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+            $table->string('ins_type', 255)->collation('utf8mb4_unicode_ci'); // varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->string('principal_name', 255)->collation('utf8mb4_unicode_ci'); // varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->integer('establishment_year'); // int NOT NULL
+            $table->integer('number_of_students'); // int NOT NULL
+            $table->text('affiliations')->collation('utf8mb4_unicode_ci')->nullable(); // text COLLATE utf8mb4_unicode_ci
+            $table->string('institute_logo', 255)->collation('utf8mb4_unicode_ci')->nullable(); // varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+            $table->text('remember_token')->collation('utf8mb4_unicode_ci'); // text COLLATE utf8mb4_unicode_ci NOT NULL
+            $table->timestamp('created_at')->nullable(); // timestamp NULL DEFAULT NULL
+            $table->timestamp('updated_at')->nullable(); // timestamp NULL DEFAULT NULL
         });
     }
 

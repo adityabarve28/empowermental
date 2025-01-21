@@ -14,14 +14,17 @@ class CreateCounselorSessionsTable extends Migration
     public function up()
     {
         Schema::create('counselor_sessions', function (Blueprint $table) {
-            $table->id(); // Auto-incrementing ID
-            $table->foreignId('counselor_id')->constrained('counselors')->onDelete('cascade'); // Foreign key to counselors table
-            $table->foreignId('student_id')->constrained('students')->onDelete('cascade'); // Foreign key to students table
-            $table->foreignId('institute_id')->constrained('institutes')->onDelete('cascade'); // Foreign key to institutes table
-            $table->timestamp('session_date'); // Date and time of the session
-            $table->text('session_notes')->nullable(); // Notes about the session
-            $table->string('session_type'); // e.g., one-on-one, group
-            $table->timestamps(); // Created and updated timestamps
+            $table->id(); // bigint unsigned AUTO_INCREMENT
+            $table->unsignedBigInteger('counselor_id'); // Foreign key to counselors table
+            $table->unsignedBigInteger('institute_id'); // Foreign key to institutes table
+            $table->timestamp('session_date'); // timestamp NOT NULL
+            $table->text('session_notes')->nullable(); // text for session notes, can be null
+            $table->string('session_type'); // varchar(255) for session type (e.g., one-on-one, group)
+            $table->timestamps(); // created_at, updated_at as timestamps
+
+            // Foreign key constraints
+            $table->foreign('counselor_id')->references('id')->on('counselors')->onDelete('cascade'); // FOREIGN KEY (counselor_id) REFERENCES counselors(id) ON DELETE CASCADE
+            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade'); // FOREIGN KEY (institute_id) REFERENCES institutes(id) ON DELETE CASCADE
         });
     }
 

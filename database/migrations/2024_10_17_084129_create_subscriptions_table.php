@@ -13,19 +13,18 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+    
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('institute_id');
-            $table->string('plan_type'); // 'Basic', 'Standard', 'Premium'
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->decimal('amount', 8, 2);
+            $table->unsignedBigInteger('plan_id');
+            $table->foreign('plan_id')->references('id')->on('subscription_plans')->onDelete('cascade');
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
         });
+    
+        Schema::enableForeignKeyConstraints();
     }
+    
 
     /**
      * Reverse the migrations.
