@@ -13,7 +13,7 @@ services:
       - DB_DATABASE=${DB_DATABASE}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-      - REDIS_PASSWORD=${REDIS_PASSWORD} # Added for Redis connection
+      - REDIS_PASSWORD=${REDIS_PASSWORD} # Redis password
     working_dir: /var/www
     volumes:
       - ./:/var/www
@@ -32,16 +32,17 @@ services:
       - "3306:3306"
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # Explicitly set root password
-      MYSQL_ALLOW_EMPTY_PASSWORD: "false" # Disallow empty passwords for security
+      MYSQL_USER: root # Use MySQL's default root user
+      MYSQL_PASSWORD: ${DB_ROOT_PASSWORD} # Consistent root password
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: "false" # Disallow empty passwords
     volumes:
       - db-data:/var/lib/mysql
 
   # Redis Server
   redis:
     image: redis:alpine
+    container_name: redis
     command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"
     environment:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
