@@ -8,12 +8,13 @@ services:
         - APP_ENV=${APP_ENV}
     environment:
       - APP_ENV=${APP_ENV}
-      - CONTAINER_ROLE=app
-      - DB_HOST=database
+      - DB_CONNECTION=${DB_CONNECTION}
+      - DB_HOST=${DB_HOST}      # Updated to match the MySQL container name
       - DB_DATABASE=${DB_DATABASE}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-      - REDIS_PASSWORD=${REDIS_PASSWORD} # Added for Redis connection
+      - DB_PORT=${DB_PORT}      # Fetching DB_PORT from environment variable
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
     working_dir: /var/www
     volumes:
       - ./:/var/www
@@ -22,20 +23,21 @@ services:
     depends_on:
       - database
       - redis
-    entrypoint: ["/var/www/docker/entrypoint.sh"] # Updated path for consistency
+    entrypoint: ["/var/www/docker/entrypoint.sh"]
 
   # Database Server
   database:
     image: mysql:8.0
     container_name: database
     ports:
-      - "3306:3306"
+      - "${DB_PORT}:${DB_PORT}"  # Dynamically using the DB_PORT variable for port mapping
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_DATABASE: ${DB_DATABASE}  # Used the environment variable here
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # Explicitly set root password
-      MYSQL_ALLOW_EMPTY_PASSWORD: "false" # Disallow empty passwords for security
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_PORT: ${DB_PORT}
+      MYSQL_ALLOW_EMPTY_PASSWORD: "false"
     volumes:
       - db-data:/var/lib/mysql
 
