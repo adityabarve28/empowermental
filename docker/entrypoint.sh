@@ -3,9 +3,9 @@
 # Function to check database readiness
 wait_for_database() {
     echo "Waiting for the database to be ready..."
-    until php -r "new PDO('mysql:host=${DB_HOST:-database};dbname=${DB_DATABASE:-test}', '${DB_USERNAME:-root}', '${DB_PASSWORD:-}');" 2>/dev/null; do
+    until php -r "new PDO('mysql:host=${DB_HOST:-database};port=${DB_PORT:-3306};dbname=${DB_DATABASE:-test}', '${DB_USERNAME:-root}', '${DB_PASSWORD:-}');" 2>/dev/null; do
         sleep 1
-        echo "Waiting for the database connection..."
+        echo "Still waiting for the database connection..."
     done
     echo "Database is ready!"
 }
@@ -20,10 +20,10 @@ fi
 
 # If .env does not exist, create it from .env.example
 if [ ! -f ".env" ]; then
-    echo "Creating env file for env $APP_ENV"
+    echo "Creating .env file for environment $APP_ENV"
     cp .env.example .env
 else
-    echo "Env file exists"
+    echo ".env file already exists"
 fi
 
 # Run Laravel migrations and other Artisan commands
@@ -39,8 +39,8 @@ php artisan cache:clear
 php artisan config:clear
 php artisan route:clear
 
-# Serve the application
-php artisan serve --port=${PORT:-8000} --host=0.0.0.0 --env=.env
+# Serve the application on the specified port or fallback to 8080
+php artisan serve --port=${PORT:-8080} --host=0.0.0.0 --env=.env
 
 # Execute the default PHP entrypoint
 exec docker-php-entrypoint "$@"
