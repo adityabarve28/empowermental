@@ -1,6 +1,48 @@
 @push('title-acc-man-dash')
 <title>Empowermental || Account Manager Dashboard</title>
 @endpush
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @stack('title-acc-man-dash')
+    <link rel="icon" href="{{ asset('/images/logo.png') }}" type="image/x-icon">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ asset('/css/dashboard-style.css') }}"> <!-- Link to your CSS file -->
+    <!-- <link rel="stylesheet" href="assets/css//loginstyle.css">
+    <link rel="stylesheet" href="assets/css/signupstyle.css"> -->
+    <style>
+        .btn-logo-upload {
+            background-image: url('../assets/images/logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 150px;
+            /* Set a width */
+            height: 150px;
+            /* Set a height */
+            border: none;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Hide the actual file input */
+        .btn-logo-upload input[type="file"] {
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
 
 @include('layouts.dashboard.acc-manager.acc-man-dash-nav')
 
@@ -108,3 +150,4 @@
     </script>
     @endguest
 </body>
+</html>
