@@ -4,16 +4,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Empowermental || Admin Dashboard</title>
-        <link rel="icon" href="http://empowermental.onrender.com/images/logo.png" type="image/x-icon">
+        <link rel="icon" href="https://empowermental.onrender.com/images/logo.png" type="image/x-icon">
     <link rel="icon" href="https://aa52-2409-40c2-505e-581e-f03f-e85b-c0f1-1ad3.ngrok-free.apphttp://empowermental.onrender.com/images/logo.png">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
     <link rel="stylesheet" href= "https://f560-2409-40c2-5006-c118-6811-4482-32b0-2261.ngrok-free.app/css/dashboard-style.css">
-    <link rel="stylesheet" href="http://empowermental.onrender.com/css/dashboard-style.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="https://empowermental.onrender.com/css/dashboard-style.css"> <!-- Link to your CSS file -->
     <!-- <link rel="stylesheet" href="assets/css//loginstyle.css">
     <link rel="stylesheet" href="assets/css/signupstyle.css"> -->
     <style>
@@ -60,6 +61,7 @@
         }
     </style>
 </head>
+
 
 @include('layouts.dashboard.admin.admin-dash-nav')
 
