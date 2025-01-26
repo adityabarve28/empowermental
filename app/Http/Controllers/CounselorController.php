@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Models\Users; // Import the User model
+use App\Models\users; // Import the User model
 use Illuminate\Support\Facades\Storage;
 
 class CounselorController
@@ -40,7 +40,7 @@ class CounselorController
         }
         $password = bcrypt($validatedData['password']);
         // Create and save User instance
-        $user = new Users();
+        $user = new users();
         $user->name = $validatedData['full_name'];
         $user->email = $validatedData['email'];
         $user->password = $password;

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use App\Models\Users; // Import the User model
+use App\Models\users; // Import the User model
 use App\Models\Student; // Import the User model
 use App\Models\institutes;
 use App\Models\Counselors;
@@ -76,8 +76,8 @@ class LoginController
         $newPassword = Hash::make($request->input('new_password'));
 
         try {
-            // Find the user by email in the Users table and update password
-            $user = Users::where('email', $email)->first();
+            // Find the user by email in the users table and update password
+            $user = users::where('email', $email)->first();
 
             if ($user) {
                 $user->password = $newPassword;

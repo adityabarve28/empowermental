@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\institutes;
-use App\Models\Users; // Import the User model
+use App\Models\users; // Import the User model
 use Illuminate\Support\Str; // For generating remember token
 
 class InstituteController
@@ -16,7 +16,7 @@ class InstituteController
 
         $remember_token = Str::random(10);
         
-        $users = new Users();
+        $users = new users();
 
         $users->name = $request['institute_name'];
         $users->email = $request['ins_email'];

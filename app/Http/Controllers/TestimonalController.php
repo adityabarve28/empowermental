@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedbacks;
-use App\Models\Users;
+use App\Models\users;
 use Illuminate\Http\Request;
 
 class TestimonalController

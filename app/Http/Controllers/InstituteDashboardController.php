@@ -447,7 +447,7 @@ class InstituteDashboardController
         if ($request->has('is_account_manager') && $request->input('is_account_manager') == 1) {
             $student->is_account_manager = 1;
 
-            // Update the `is_account_manager` field in the Users table
+            // Update the `is_account_manager` field in the users table
             $user = \App\Models\User::find($student->user_id);
             if ($user) {
                 $user->is_account_manager = 1;
@@ -459,7 +459,7 @@ class InstituteDashboardController
                 ->where('id', '!=', $student->id)
                 ->update(['is_account_manager' => 0]);
 
-            // Update the Users table for these students
+            // Update the users table for these students
             $otherStudents = Student::where('institute_id', $instituteId)
                 ->where('id', '!=', $student->id)
                 ->pluck('user_id');
@@ -468,7 +468,7 @@ class InstituteDashboardController
         } else {
             $student->is_account_manager = 0;
 
-            // Update the `is_account_manager` field in the Users table
+            // Update the `is_account_manager` field in the users table
             $user = \App\Models\User::find($student->user_id);
             if ($user) {
                 $user->is_account_manager = 0;
@@ -490,14 +490,14 @@ class InstituteDashboardController
         // Find the student by ID
         $student = Student::findOrFail($id);
 
-        // Find the corresponding user in the `Users` table
-        $user = \App\Models\Users::find($student->user_id);
+        // Find the corresponding user in the `users` table
+        $user = \App\Models\users::find($student->user_id);
 
         try {
             // Delete the student record from the `Student` table
             $student->delete();
 
-            // Delete the user record from the `Users` table if it exists
+            // Delete the user record from the `users` table if it exists
             if ($user) {
                 $user->delete();
             }
