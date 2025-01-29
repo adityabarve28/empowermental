@@ -21,7 +21,7 @@ wait_for_redis() {
 }
 
 wait_for_database
-wait_for_redis
+#wait_for_redis
 
 # Install Composer dependencies
 if [ ! -f "vendor/autoload.php" ]; then
