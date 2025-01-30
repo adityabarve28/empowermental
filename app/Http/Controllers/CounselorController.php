@@ -65,7 +65,8 @@ class CounselorController
         $counselor->remember_token = $remember_token;
         $counselor->save();
 
-        // Flash message and redirect
-        return redirect()->back()->with('success', 'Registration successful! Welcome');
+         // Set a flash message and redirect
+         session()->flash('success', 'Signup successful! Please log in.');
+         return redirect(route('login'));
     }
 }
