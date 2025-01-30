@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Subscription;
 use App\Models\SubscriptionPlan;
 use App\Models\AccountManager;
-use App\Models\Institutes;
+use App\Models\Institute;
 use App\Models\Counselors; // Import the Counselors model
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
@@ -188,7 +188,7 @@ class InstituteDashboardController
         $scheduledAppointments = Appointment::where('institute_id', $userId)->get();
 
         // Fetch the institute details
-        $institute = Institutes::where('id', $userId)->first();
+        $institute = Institute::where('id', $userId)->first();
 
         // Fetch the account manager details if one exists for this institute
         $accountManager = Student::where('institute_id', $userId)->where('is_account_manager', 1)->first();
@@ -247,7 +247,7 @@ class InstituteDashboardController
     {
         // Get the current institute's details using the authenticated user
         $instituteId = Auth::user()->id;
-        $institute = Institutes::find($instituteId);
+        $institute = Institute::find($instituteId);
 
         // Pass the institute data to the profile view
         return view('layouts.dashboard.institute.inst-profile')->with(compact('institute'));
@@ -257,7 +257,7 @@ class InstituteDashboardController
     public function updateProfile(Request $request)
     {
         $instituteId = Auth::user()->id; // Use the authenticated user's ID
-        $institute = Institutes::find($instituteId);
+        $institute = Institute::find($instituteId);
 
         // Update the institute's details only if a new value is provided
         if ($request->filled('instituteName')) {
@@ -316,7 +316,7 @@ class InstituteDashboardController
         $instituteId = Auth::user()->id;
 
         // Fetch institute details
-        $institute = Institutes::find($instituteId);
+        $institute = Institute::find($instituteId);
 
         // Pass data to the 'add-student' view
         return view('layouts.dashboard.institute.add-student', compact('institute'));
