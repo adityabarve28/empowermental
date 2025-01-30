@@ -9,9 +9,7 @@ use App\Models\Institute;
 use App\Models\Subscription;
 use App\Models\Student;
 use App\Models\Counselors;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
 
 class CounselorDashboardController
 {
@@ -30,11 +28,11 @@ class CounselorDashboardController
             ->get();
     
         // Extract unique Institute associated with the therapist
-        $Institute = $subscriptions->pluck('institute')->filter()->unique('id')->values();
+        $institutes = $subscriptions->pluck('institute')->filter()->unique('id')->values();
     
         // Fetch account managers (coordinators) for each institute
         $accountManagers = Student::where('is_account_manager', 1)
-            ->whereIn('institute_id', $Institute->pluck('id'))
+            ->whereIn('institute_id', $institutes->pluck('id'))
             ->get()
             ->keyBy('institute_id');
     
@@ -47,12 +45,10 @@ class CounselorDashboardController
                 ->first();
         });
     
-        $name = $counselor->name;
-    
         return view('layouts.dashboard.counselor.counselor-dashboard', compact(
-            'name',
+            'counselor',
             'appointments',
-            'Institute',
+            'institutes',
             'accountManagers'
         ));
     }
@@ -116,5 +112,4 @@ class CounselorDashboardController
     
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
-    
 }
