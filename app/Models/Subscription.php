@@ -12,7 +12,7 @@ class Subscription extends Model
     // Define relationship to Institute
     public function institute()
     {
-        return $this->belongsTo(Institutes::class, 'institute_id');
+        return $this->belongsTo(Institute::class, 'institute_id');
     }
     public function student()
     {
