@@ -10,7 +10,7 @@ class Feedbacks extends Model
     protected $primaryKey = "id";
 
     protected $fillable = [
-        'user_id',
+        'id',
         'role',
         'feedback',
         'to_id',

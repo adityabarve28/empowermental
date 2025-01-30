@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
-use App\Models\Institutes;
+use App\Models\Institute;
 use App\Models\Subscription;
 use App\Models\Student;
 use App\Models\Counselors;
@@ -29,18 +29,18 @@ class CounselorDashboardController
             ->with(['institute'])
             ->get();
     
-        // Extract unique institutes associated with the therapist
-        $institutes = $subscriptions->pluck('institute')->filter()->unique('id')->values();
+        // Extract unique Institute associated with the therapist
+        $Institute = $subscriptions->pluck('institute')->filter()->unique('id')->values();
     
         // Fetch account managers (coordinators) for each institute
         $accountManagers = Student::where('is_account_manager', 1)
-            ->whereIn('institute_id', $institutes->pluck('id'))
+            ->whereIn('institute_id', $Institute->pluck('id'))
             ->get()
             ->keyBy('institute_id');
     
         // Set each appointment's institute, coordinator, and plan details
         $appointments->each(function ($appointment) use ($accountManagers) {
-            $appointment->institute = Institutes::find($appointment->institute_id);
+            $appointment->institute = Institute::find($appointment->institute_id);
             $appointment->coordinator = $accountManagers->get($appointment->institute_id);
             $appointment->plan = Subscription::where('plan_id', 1)
                 ->where('institute_id', $appointment->institute_id)
@@ -52,7 +52,7 @@ class CounselorDashboardController
         return view('layouts.dashboard.counselor.counselor-dashboard', compact(
             'name',
             'appointments',
-            'institutes',
+            'Institute',
             'accountManagers'
         ));
     }
