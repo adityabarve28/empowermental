@@ -16,3 +16,4 @@ class Counselors extends Model
         return $this->hasMany(Subscription::class, 'therapist_id'); // Ensure 'therapist_id' is correct
     }
 }
+    

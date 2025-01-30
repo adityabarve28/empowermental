@@ -16,6 +16,8 @@ wait_for_database
 # Install Composer dependencies if vendor/autoload.php does not exist
 if [ ! -f "vendor/autoload.php" ]; then
     composer install --no-progress --no-interaction
+else
+    composer dump-autoload --optimize
 fi
 
 # If .env does not exist, create it from .env.example
@@ -26,7 +28,7 @@ else
     echo ".env file already exists"
 fi
 
-# Run Laravel migrations and other Artisan commands
+# Run Laravel migrations and seeders
 if php artisan migrate:fresh --seed; then
     echo "Migrations ran successfully."
 else
@@ -34,6 +36,7 @@ else
     exit 1
 fi
 
+# Laravel housekeeping
 php artisan key:generate
 php artisan cache:clear
 php artisan config:clear
