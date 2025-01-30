@@ -22,8 +22,9 @@
     <link rel="icon" href="https://aa52-2409-40c2-505e-581e-f03f-e85b-c0f1-1ad3.ngrok-free.app{{ asset('/images/logo.png') }}">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href= "https://f560-2409-40c2-5006-c118-6811-4482-32b0-2261.ngrok-free.app/css/dashboard-style.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ asset('/css/dashboard-style.css') }}"> <!-- Link to your CSS file -->
     <!-- <link rel="stylesheet" href="assets/css//loginstyle.css">
     <link rel="stylesheet" href="assets/css/signupstyle.css"> -->
@@ -180,15 +181,6 @@
         </table>
     </div>
 
-    @include('layouts.footer')
-</body>
-@else
-<script>
-    alert('Login To Continue');
-    window.location.href = "{{ route('login') }}";
-</script>
-@endif
-@endauth
                 <!-- Institute Modal -->
                 <div class="modal fade" id="instituteModal{{ $institute->id }}" tabindex="-1" role="dialog" aria-labelledby="instituteModalLabel{{ $institute->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
@@ -237,4 +229,14 @@
                     </div>
                 </div>
                 @endif
+                
+    @include('layouts.footer')
+</body>
+@else
+<script>
+    alert('Login To Continue');
+    window.location.href = "{{ route('login') }}";
+</script>
+@endif
+@endauth
                 </html>
