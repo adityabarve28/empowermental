@@ -1,7 +1,23 @@
 @push('title-stu-dash')
 <title>Empowermental || Add Feedback</title>
 @endpush
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @stack('title-stu-dash')
+    <link rel="icon" href="{{ asset('/images/logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="https://aa52-2409-40c2-505e-581e-f03f-e85b-c0f1-1ad3.ngrok-free.app{{ asset('/images/logo.png') }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://empowermental.onrender.com/css/dashboard-style.css"">
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link rel="stylesheet" href= "https://f560-2409-40c2-5006-c118-6811-4482-32b0-2261.ngrok-free.app/css/dashboard-style.css">
+    <link rel="stylesheet" href=" https://f560-2409-40c2-5006-c118-6811-4482-32b0-2261.ngrok-free.app/css/style.css">
 
+</head>
+
+<>
 @include('layouts.dashboard.student.stu-dash-nav')
 
 <body class="body-dashboard">
@@ -76,6 +92,8 @@
             select.closest('form').appendChild(toNameInput);
         }
     </script>
-</body>
+
 
 @include('layouts.footer')
+</body>
+</html>

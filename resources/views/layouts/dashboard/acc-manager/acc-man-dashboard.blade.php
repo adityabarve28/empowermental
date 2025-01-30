@@ -11,7 +11,7 @@
     <link rel="icon" href="{{ asset('/images/logo.png') }}" type="image/x-icon">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="{{ asset('/css/dashboard-style.css') }}"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="https://empowermental.onrender.com/css/dashboard-style.css""> <!-- Link to your CSS file -->
     <!-- <link rel="stylesheet" href="assets/css//loginstyle.css">
     <link rel="stylesheet" href="assets/css/signupstyle.css"> -->
     <style>
