@@ -20,7 +20,7 @@ class Appointment extends Model
     // Define the relationship to the Institute
     public function institute()
     {
-        return $this->belongsTo(Institutes::class, 'institute_id');
+        return $this->belongsTo(Institute::class, 'institute_id');
     }
 
     // Define the relationship to the Counselor (assuming counselor_id is the foreign key)
