@@ -13,7 +13,7 @@ class CreateFeedbackTable extends Migration
      */
     public function up()
     {
-        Schema::create('feedback', function (Blueprint $table) {
+        Schema::create('feedbacks', function (Blueprint $table) {
             $table->id(); // Primary key
             $table->unsignedBigInteger('to_id')->nullable(false); // Recipient ID
             $table->string('to_name')->nullable(false); // Recipient Name
