@@ -14,44 +14,46 @@ use Illuminate\Support\Facades\Storage;
 class CounselorDashboardController
 {
     public function showDashboard()
-    {
-        $counselor = Auth::user();
-    
-        // Fetch all the pending appointments for the counselor
-        $appointments = Appointment::where('counselor_id', $counselor->id)
-            ->where('status', 'pending')
-            ->get();
-    
-        // Fetch subscriptions related to the therapist (counselor)
-        $subscriptions = Subscription::where('therapist_id', $counselor->id)
-            ->with(['institute'])
-            ->get();
-    
-        // Extract unique Institute associated with the therapist
-        $institutes = $subscriptions->pluck('institute')->filter()->unique('id')->values();
-    
-        // Fetch account managers (coordinators) for each institute
-        $accountManagers = Student::where('is_account_manager', 1)
-            ->whereIn('institute_id', $institutes->pluck('id'))
-            ->get()
-            ->keyBy('institute_id');
-    
-        // Set each appointment's institute, coordinator, and plan details
-        $appointments->each(function ($appointment) use ($accountManagers) {
-            $appointment->institute = Institute::find($appointment->institute_id);
-            $appointment->coordinator = $accountManagers->get($appointment->institute_id);
-            $appointment->plan = Subscription::where('plan_id', 1)
-                ->where('institute_id', $appointment->institute_id)
-                ->first();
-        });
-    
-        return view('layouts.dashboard.counselor.counselor-dashboard', compact(
-            'counselor',
-            'appointments',
-            'institutes',
-            'accountManagers'
-        ));
-    }
+{
+    $counselor = Auth::user();
+
+    // Fetch all the pending appointments for the counselor
+    $appointments = Appointment::where('counselor_id', $counselor->id)
+        ->where('status', 'pending')
+        ->get();
+
+    // Fetch subscriptions related to the therapist (counselor)
+    $subscriptions = Subscription::where('therapist_id', $counselor->id)
+        ->with(['institute'])
+        ->get();
+
+    // Extract unique Institute associated with the therapist
+    $Institute = $subscriptions->pluck('institute')->filter()->unique('id')->values();
+
+    // Fetch account managers (coordinators) for each institute
+    $accountManagers = Student::where('is_account_manager', 1)
+        ->whereIn('institute_id', $Institute->pluck('id'))
+        ->get()
+        ->keyBy('institute_id');
+
+    // Set each appointment's institute, coordinator, and plan details
+    $appointments->each(function ($appointment) use ($accountManagers) {
+        $appointment->institute = Institute::find($appointment->institute_id);
+        $appointment->coordinator = $accountManagers->get($appointment->institute_id);
+        $appointment->plan = Subscription::where('plan_id', 1)
+            ->where('institute_id', $appointment->institute_id)
+            ->first();
+    });
+
+    // Pass the $name variable to the view
+    return view('layouts.dashboard.counselor.counselor-dashboard', [
+        'name' => $counselor->name,
+        'appointments' => $appointments,
+        'Institute' => $Institute,
+        'accountManagers' => $accountManagers
+    ]);
+}
+
 
     // Show counselor profile
     public function showProfile()
