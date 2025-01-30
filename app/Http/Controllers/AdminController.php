@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Institutes;
-use App\Models\counselors;
-use App\Models\subscription;
+use App\Models\Institute;
+use App\Models\Counselors;
+use App\Models\Subscription;
 use App\Models\Student;
 use App\Models\FileReturns;
 use App\Models\FollowUp;
@@ -23,7 +23,7 @@ class AdminController
     public function ViewInstitutes()
     {
         // Fetch all institutes
-        $institutes = institutes::all();
+        $institutes = Institute::all();
 
         // Return the admin dashboard view and pass the institutes data
         return view('layouts.dashboard.admin.view-institutes', compact('institutes'));
