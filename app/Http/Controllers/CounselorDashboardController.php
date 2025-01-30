@@ -28,11 +28,11 @@ class CounselorDashboardController
         ->get();
 
     // Extract unique Institute associated with the therapist
-    $Institute = $subscriptions->pluck('institute')->filter()->unique('id')->values();
+    $institutes = $subscriptions->pluck('institute')->filter()->unique('id')->values();  // Add this line to get the institutes
 
     // Fetch account managers (coordinators) for each institute
     $accountManagers = Student::where('is_account_manager', 1)
-        ->whereIn('institute_id', $Institute->pluck('id'))
+        ->whereIn('institute_id', $institutes->pluck('id'))
         ->get()
         ->keyBy('institute_id');
 
@@ -45,14 +45,15 @@ class CounselorDashboardController
             ->first();
     });
 
-    // Pass the $name variable to the view
+    // Pass the institutes variable to the view
     return view('layouts.dashboard.counselor.counselor-dashboard', [
         'name' => $counselor->name,
         'appointments' => $appointments,
-        'Institute' => $Institute,
+        'institutes' => $institutes,  // Pass institutes to the view
         'accountManagers' => $accountManagers
     ]);
 }
+
 
 
     // Show counselor profile
