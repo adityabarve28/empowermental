@@ -130,20 +130,20 @@
     </div>
 
     <div class="container-dashboard" id="assignment">
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Institute Name</th>
-                    <th scope="col">Institute Location</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Email ID</th>
-                    <th scope="col">Co-ordinator</th>
-                    <th scope="col">Co-ordinator Contact Number</th>
-                    <th scope="col">Co-ordinator Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($institutes as $institute)
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Institute Name</th>
+                <th scope="col">Institute Location</th>
+                <th scope="col">Contact Number</th>
+                <th scope="col">Email ID</th>
+                <th scope="col">Co-ordinator</th>
+                <th scope="col">Co-ordinator Contact Number</th>
+                <th scope="col">Co-ordinator Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($institutes as $institute)
                 @php
                     $appointment = $appointments->firstWhere('institute_id', $institute->id);
                     $accountManager = $accountManagers->get($institute->id);
@@ -172,14 +172,15 @@
                     <td scope="row">{{ $accountManager->email ?? 'NA' }}</td>
                 </tr>
                 @endif
-                @empty
-                <tr>
-                    <td colspan="7">No appointments found.</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
+            @empty
+            <tr>
+                <td colspan="7">No Assignments</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+
 
                 <!-- Institute Modal -->
                 <div class="modal fade" id="instituteModal{{ $institute->id }}" tabindex="-1" role="dialog" aria-labelledby="instituteModalLabel{{ $institute->id }}" aria-hidden="true">
