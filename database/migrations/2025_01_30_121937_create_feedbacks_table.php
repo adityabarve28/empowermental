@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('to_id')->constrained('institutes');  // Assuming 'institutes' table exists
+            $table->int('user_id'); 
+            $table->int('to_id');  // Assuming 'institutes' table exists
             $table->string('to_name');
             $table->text('feedback');
             $table->timestamps();
