@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @stack('title-cons-dash')
-     <link rel="icon" href="https://empowermental.onrender.com/images/logo.png" type="image/x-icon">
+    <link rel="icon" href="https://empowermental.onrender.com/images/logo.png" type="image/x-icon">
     <link rel="icon" href="https://aa52-2409-40c2-505e-581e-f03f-e85b-c0f1-1ad3.ngrok-free.app{{ asset('/images/logo.png') }}">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -99,7 +99,7 @@
             <tbody>
                 @forelse ($appointments as $appointment)
                 <tr>
-                <td>{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('D d M Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('D d M Y') }}</td>
 
                     <td scope="row">{{ $appointment->coordinator->name ?? 'N/A' }}</td>
                     <td scope="row">{{ $appointment->institute->institute_name }}</td>
@@ -130,23 +130,23 @@
     </div>
 
     <div class="container-dashboard" id="assignment">
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Institute Name</th>
-                <th scope="col">Institute Location</th>
-                <th scope="col">Contact Number</th>
-                <th scope="col">Email ID</th>
-                <th scope="col">Co-ordinator</th>
-                <th scope="col">Co-ordinator Contact Number</th>
-                <th scope="col">Co-ordinator Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($institutes as $institute)
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Institute Name</th>
+                    <th scope="col">Institute Location</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Email ID</th>
+                    <th scope="col">Co-ordinator</th>
+                    <th scope="col">Co-ordinator Contact Number</th>
+                    <th scope="col">Co-ordinator Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($institutes as $institute)
                 @php
-                    $appointment = $appointments->firstWhere('institute_id', $institute->id);
-                    $accountManager = $accountManagers->get($institute->id);
+                $appointment = $appointments->firstWhere('institute_id', $institute->id);
+                $accountManager = $accountManagers->get($institute->id);
                 @endphp
 
                 @if ($appointment)
@@ -172,65 +172,62 @@
                     <td scope="row">{{ $accountManager->email ?? 'NA' }}</td>
                 </tr>
                 @endif
-            @empty
-            <tr>
-                <td colspan="7">No Assignments</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+                @empty
+                <tr>
+                    <td colspan="7">No Assignments</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 
 
-                <!-- Institute Modal -->
-                <div class="modal fade" id="instituteModal{{ $institute->id }}" tabindex="-1" role="dialog" aria-labelledby="instituteModalLabel{{ $institute->id }}" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="instituteModalLabel{{ $institute->id }}">Institute Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p><strong>Institute Name:</strong> {{ $institute->institute_name }}</p>
-                                <p><strong>Email:</strong> {{ $institute->ins_email }}</p>
-                                <p><strong>Phone:</strong> {{ $institute->ins_phone }}</p>
-                                <p><strong>Registration Number:</strong> {{ $institute->registration_number }}</p>
-                                <p><strong>Address:</strong> {{ $institute->ins_address }}</p>
-                                <p><strong>Website:</strong> <a href="{{ $institute->website }}" target="_blank">{{ $institute->website }}</a></p>
-                                <p><strong>Type:</strong> {{ $institute->ins_type }}</p>
-                                <p><strong>Principal Name:</strong> {{ $institute->principal_name }}</p>
-                                <p><strong>Establishment Year:</strong> {{ $institute->establishment_year }}</p>
-                                <p><strong>Number of Students:</strong> {{ $institute->number_of_students }}</p>
-                                <p><strong>Affiliations:</strong> {{ $institute->affiliations }}</p>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Institute Modal -->
+    <div class="modal fade" id="instituteModal{{ $institute->id }}" tabindex="-1" role="dialog" aria-labelledby="instituteModalLabel{{ $institute->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="instituteModalLabel{{ $institute->id }}">Institute Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-
-                <!-- Account Manager Modal -->
-                @if ($accountManager)
-                <div class="modal fade" id="accountManagerModal{{ $accountManager->id }}" tabindex="-1" role="dialog" aria-labelledby="accountManagerModalLabel{{ $accountManager->id }}" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="accountManagerModalLabel{{ $accountManager->id }}">Account Manager Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p><strong>Name:</strong> {{ $accountManager->name }}</p>
-                                <p><strong>Email:</strong> {{ $accountManager->email }}</p>
-                                <p><strong>Phone:</strong> {{ $accountManager->phone }}</p>
-                                <p><strong>Year of Study:</strong> {{ $accountManager->year_of_study }}</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="modal-body">
+                    @if ($institute)
+                    <p><strong>Institute Name:</strong> {{ $institute->institute_name }}</p>
+                    <p><strong>Email:</strong> {{ $institute->ins_email }}</p>
+                    <!-- Add other institute details as required -->
+                    @else
+                    <p>No institute assigned.</p>
+                    @endif
                 </div>
-                @endif
-                
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Account Manager Modal -->
+    @if ($accountManager)
+    <div class="modal fade" id="accountManagerModal{{ $accountManager->id }}" tabindex="-1" role="dialog" aria-labelledby="accountManagerModalLabel{{ $accountManager->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="accountManagerModalLabel{{ $accountManager->id }}">Account Manager Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Name:</strong> {{ $accountManager->name }}</p>
+                    <p><strong>Email:</strong> {{ $accountManager->email }}</p>
+                    <p><strong>Phone:</strong> {{ $accountManager->phone }}</p>
+                    <p><strong>Year of Study:</strong> {{ $accountManager->year_of_study }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
     @include('layouts.footer')
 </body>
 @else
@@ -240,4 +237,5 @@
 </script>
 @endif
 @endauth
-                </html>
+
+</html>
