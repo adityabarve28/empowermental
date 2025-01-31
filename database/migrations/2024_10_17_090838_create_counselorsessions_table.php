@@ -33,8 +33,10 @@ class CreateCounselorSessionsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('counselor_sessions');
+        if (Schema::hasTable('counselor_sessions')) { // Check if the table exists
+            Schema::dropIfExists('counselor_sessions');
+        }
     }
 }

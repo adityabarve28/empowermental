@@ -25,6 +25,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contactus');
+        if (Schema::hasTable('contactus')) { // Check if the table exists
+            Schema::dropIfExists('contactus');
+        }
     }
 };

@@ -28,8 +28,10 @@ class CreateUserTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('users');
+        if (Schema::hasTable('user')) { // Check if the table exists
+            Schema::dropIfExists('user');
+        }
     }
 }

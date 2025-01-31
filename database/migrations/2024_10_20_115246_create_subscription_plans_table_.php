@@ -30,8 +30,10 @@ class CreateSubscriptionPlansTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('subscription_plans');
+        if (Schema::hasTable('subscription_plans')) { // Check if the table exists
+            Schema::dropIfExists('subscription_plans');
+        }
     }
 }

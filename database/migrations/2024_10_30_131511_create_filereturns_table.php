@@ -31,6 +31,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('filereturns');
+        if (Schema::hasTable('filereturns')) { // Check if the table exists
+            Schema::dropIfExists('filereturns');
+        }
     }
 };

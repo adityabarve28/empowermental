@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id(); // bigint unsigned NOT NULL AUTO_INCREMENT
-            $table->string('name'); // varchar(255) NOT NULL
-            $table->string('email'); // varchar(255) NOT NULL
-            $table->string('password'); // varchar(255) NOT NULL
-            $table->enum('role', ['student', 'counselor', 'institute'])->default('student'); // enum NOT NULL DEFAULT 'student'
-            $table->integer('is_account_manager')->nullable(); // int DEFAULT NULL
-            $table->string('remember_token', 100)->nullable(); // varchar(100) DEFAULT NULL
-            $table->timestamps(); // created_at and updated_at timestamps
-            $table->timestamp('email_verified_at')->nullable(); // nullable email verification timestamp
-        });
+        if (!Schema::hasTable('users')) { // Check if the table already exists
+            Schema::create('users', function (Blueprint $table) {
+                $table->id(); // bigint unsigned NOT NULL AUTO_INCREMENT
+                $table->string('name'); // varchar(255) NOT NULL
+                $table->string('email')->unique(); // varchar(255) NOT NULL, must be unique
+                $table->string('password'); // varchar(255) NOT NULL
+                $table->enum('role', ['student', 'counselor', 'institute'])->default('student'); // enum NOT NULL DEFAULT 'student'
+                $table->integer('is_account_manager')->nullable(); // int DEFAULT NULL
+                $table->string('remember_token', 100)->nullable(); // varchar(100) DEFAULT NULL
+                $table->timestamps(); // created_at and updated_at timestamps
+                $table->timestamp('email_verified_at')->nullable(); // nullable email verification timestamp
+            });
+        }
     }
 
     /**
@@ -29,6 +31,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        if (Schema::hasTable('users')) { // Check if the table exists
+            Schema::dropIfExists('users');
+        }
     }
 };

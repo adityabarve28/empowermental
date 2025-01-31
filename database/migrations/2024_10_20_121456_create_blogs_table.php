@@ -21,8 +21,10 @@ class CreateBlogsTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('blogs');
+        if (Schema::hasTable('blogs')) { // Check if the table exists
+            Schema::dropIfExists('blogs');
+        }
     }
 }

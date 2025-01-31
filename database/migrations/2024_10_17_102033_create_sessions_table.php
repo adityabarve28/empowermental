@@ -26,6 +26,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sessions');
+        if (Schema::hasTable('sessions')) { // Check if the table exists
+            Schema::dropIfExists('sessions');
+        }
     }
 };

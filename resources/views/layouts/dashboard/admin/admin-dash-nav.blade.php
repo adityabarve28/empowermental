@@ -14,6 +14,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.subscription-plans.manage')}}" data-text="Add Subscription Plan">Add Subscription Plan</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('admin.institutes.index')}}" data-text="View Institutes">View Institutes</a>
             </li>

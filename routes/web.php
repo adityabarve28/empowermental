@@ -18,6 +18,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\TestimonalController;
+use App\Http\Controllers\SubscriptionPlanController;
 // Get Routes to Navigate through website
 
 Route::get('/', function () {
@@ -187,6 +188,7 @@ Route::get('/buy-subscription/{plan}', [SubscriptionController::class, 'buySubsc
 Route::get('/feedbacks', [TestimonalController::class, 'index'])->name('feedbacks');
 
 Route::get('/view-account-manager', [AdminController::class, 'ViewAccountManager'])->name('ViewAccountManager');
+// Route::get('/add-subscription-plan', [AdminController::class, 'ViewAddSubscriptionPlan'])->name('ViewAddSubscriptionPlan');
 
 Route::post('/appointments/{id}/ask-to-reschedule', [AppointmentController::class, 'askToReschedule'])->name('appointments.askToReschedule');
 Route::get('/view-return-requests', [AdminController::class, 'ViewBillings'])->name('ViewReturnRequestss');
@@ -198,3 +200,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/follow-ups/create', [AdminController::class, 'createFollowUp'])->name('admin.follow-ups.create');
     Route::post('/follow-ups', [AdminController::class, 'storeFollowUp'])->name('admin.follow-ups.store');
 });
+
+Route::get('/manage-subscription', [SubscriptionPlanController::class, 'manage'])->name('admin.subscription-plans.manage');
+Route::post('/add-subscription', [SubscriptionPlanController::class, 'store'])->name('admin.subscription-plans.store');
+Route::post('/update-subscription', [SubscriptionPlanController::class, 'update'])->name('admin.subscription-plans.update');

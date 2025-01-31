@@ -33,8 +33,10 @@ class CreateWorkshopsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('workshops');
+        if (Schema::hasTable('workshops')) { // Check if the table exists
+            Schema::dropIfExists('workshops');
+        }
     }
 }

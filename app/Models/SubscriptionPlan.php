@@ -10,7 +10,9 @@ class SubscriptionPlan extends Model
     use HasFactory;
     protected $table = "subscription_plans";
     protected $primarykey = "id";
-    protected $fillable = ['name', 'price', 'features', 'discount'];
+    protected $fillable = [
+        'name', 'price', 'duration', 'features', 'sessions_approved', 'discount'
+    ];
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class, 'id');

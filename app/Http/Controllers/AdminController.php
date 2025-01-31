@@ -145,5 +145,13 @@ class AdminController
         // Return the view with the appointments data
         return view('layouts.dashboard.admin.view-appointments', compact('appointments'));
     }
+    public function ViewAddSubscriptionPlan()
+{
+    $plans = Subscription::all(); // Fetch all subscription plans
+    return view('layouts.dashboard.admin.add-subscription-plan', compact('plans'));
+}
+
     
 }
+
+
