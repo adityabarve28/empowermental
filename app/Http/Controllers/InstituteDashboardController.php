@@ -225,6 +225,7 @@ class InstituteDashboardController
 
     public function viewaccman($id)
     {
+        
         // Get the authenticated institute
         $institute = Auth::user()->id;
     
@@ -233,7 +234,9 @@ class InstituteDashboardController
                                   ->where('institute_id', $institute)
                                   ->where('id', $id) // Ensures we're fetching by the given ID as well
                                   ->first();
-    
+                                  if (!$accountManager) {
+                                    abort(404, 'Account Manager Not Found');
+                                }
         // Check if the account manager exists
         if (!$accountManager) {
             return redirect()->back()->withErrors(['error' => 'Account Manager not found.']);

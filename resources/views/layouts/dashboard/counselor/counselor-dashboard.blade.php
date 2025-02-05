@@ -130,103 +130,63 @@
     </div>
 
     <div class="container-dashboard" id="assignment">
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Institute Name</th>
-                    <th scope="col">Institute Location</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Email ID</th>
-                    <th scope="col">Co-ordinator</th>
-                    <th scope="col">Co-ordinator Contact Number</th>
-                    <th scope="col">Co-ordinator Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($institutes as $institute)
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Institute Name</th>
+                <th scope="col">Institute Location</th>
+                <th scope="col">Contact Number</th>
+                <th scope="col">Email ID</th>
+                <th scope="col">Co-ordinator</th>
+                <th scope="col">Co-ordinator Contact Number</th>
+                <th scope="col">Co-ordinator Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($institutes as $institute)
                 @php
-                $appointment = $appointments->firstWhere('institute_id', $institute->id);
-                $accountManager = $accountManagers->get($institute->id);
+                    $appointment = $appointments->firstWhere('institute_id', $institute->id);
+                    $accountManager = $accountManagers->get($institute->id);
                 @endphp
 
                 @if ($appointment)
-                <tr>
-                    <td scope="row">
-                        <a href="#" data-toggle="modal" data-target="#instituteModal{{ $institute->id }}">
-                            {{ $institute->institute_name }}
-                        </a>
-                    </td>
-                    <td scope="row">{{ $institute->ins_address }}</td>
-                    <td scope="row">{{ $institute->ins_phone }}</td>
-                    <td scope="row">{{ $institute->ins_email }}</td>
-                    <td scope="row">
-                        @if ($accountManager)
-                        <a href="#" data-toggle="modal" data-target="#accountManagerModal{{ $accountManager->id }}">
-                            {{ $accountManager->name }}
-                        </a>
-                        @else
-                        NA
-                        @endif
-                    </td>
-                    <td scope="row">{{ $accountManager->phone ?? 'NA' }}</td>
-                    <td scope="row">{{ $accountManager->email ?? 'NA' }}</td>
-                </tr>
+                    <tr>
+                        <!-- Institute Name with Link -->
+                        <td scope="row">
+                            <a href="{{ route('institute.details', ['id' => $institute->id]) }}">
+                                {{ $institute->institute_name }}
+                            </a>
+                        </td>
+                        <!-- Institute Location -->
+                        <td scope="row">{{ $institute->ins_address }}</td>
+                        <!-- Contact Number -->
+                        <td scope="row">{{ $institute->ins_phone }}</td>
+                        <!-- Email ID -->
+                        <td scope="row">{{ $institute->ins_email }}</td>
+                        <!-- Account Manager Name with Link -->
+                        <td scope="row">
+                            @if ($accountManager)
+                                <a href="{{ route('accountManager.details', ['id' => $accountManager->id]) }}">
+                                    {{ $accountManager->name }}
+                                </a>
+                            @else
+                                NA
+                            @endif
+                        </td>
+                        <!-- Account Manager Contact Number -->
+                        <td scope="row">{{ $accountManager->phone ?? 'NA' }}</td>
+                        <!-- Account Manager Email -->
+                        <td scope="row">{{ $accountManager->email ?? 'NA' }}</td>
+                    </tr>
                 @endif
-                @empty
+            @empty
                 <tr>
                     <td colspan="7">No Assignments</td>
                 </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-
-
-    <!-- Institute Modal -->
-    <div class="modal fade" id="instituteModal{{ $institute->id }}" tabindex="-1" role="dialog" aria-labelledby="instituteModalLabel{{ $institute->id }}" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="instituteModalLabel{{ $institute->id }}">Institute Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @if ($institute)
-                    <p><strong>Institute Name:</strong> {{ $institute->institute_name }}</p>
-                    <p><strong>Email:</strong> {{ $institute->ins_email }}</p>
-                    <!-- Add other institute details as required -->
-                    @else
-                    <p>No institute assigned.</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Account Manager Modal -->
-    @if ($accountManager)
-    <div class="modal fade" id="accountManagerModal{{ $accountManager->id }}" tabindex="-1" role="dialog" aria-labelledby="accountManagerModalLabel{{ $accountManager->id }}" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="accountManagerModalLabel{{ $accountManager->id }}">Account Manager Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Name:</strong> {{ $accountManager->name }}</p>
-                    <p><strong>Email:</strong> {{ $accountManager->email }}</p>
-                    <p><strong>Phone:</strong> {{ $accountManager->phone }}</p>
-                    <p><strong>Year of Study:</strong> {{ $accountManager->year_of_study }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
+            @endforelse
+        </tbody>
+    </table>
+</div>
 
     @include('layouts.footer')
 </body>

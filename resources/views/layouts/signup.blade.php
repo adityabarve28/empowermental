@@ -11,8 +11,7 @@
     <link rel="icon" href="https://empowermental.onrender.com/images/logo.png" type="image/x-icon">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://empowermental.onrender.com/css/style.css"> <!-- Link to your CSS file -->
-    <!-- <link rel="stylesheet" href="assets/css//loginstyle.css">
-    <link rel="stylesheet" href="assets/css/signupstyle.css"> -->
+   <link rel="stylesheet" href="css/style.css"> 
     <style>
         .hidden {
             display: none;
@@ -85,7 +84,7 @@
                 <div class="form-group row">
                     <div class="col-md-6">
                         <label for="counselorEmail">Email Address</label>
-                        <input type="email" class="form-control" id="counselorEmail" name="email" placeholder="Enter your email" required>
+                        <input type="email" class="form-control email" id="counselorEmail" name="email" placeholder="Enter your email" required>
                     </div>
                     <div class="col-md-6">
                         <label for="counselorLicense">License/Certification Number</label>
@@ -148,7 +147,7 @@
 
                 <div class="form-group">
                     <label for="instituteEmail">Institute Email Address</label>
-                    <input type="email" class="form-control" id="instituteEmail" name="ins_email" placeholder="Enter the institute email" required>
+                    <input type="email" class="form-control email" id="instituteEmail" name="ins_email" placeholder="Enter the institute email" required>
                 </div>
 
                 <div class="form-group row">

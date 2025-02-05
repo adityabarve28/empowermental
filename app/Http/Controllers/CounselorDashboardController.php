@@ -115,4 +115,17 @@ class CounselorDashboardController
     
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
+
+    public function viewInstituteDetails($id)
+{
+    $institute = Institute::findOrFail($id); // Fetch the institute by ID
+    return view('layouts.dashboard.counselor.institute-details', compact('institute'));
+}
+
+public function viewAccountManagerDetails($id)
+{
+    $accountManager = Student::where('id', $id)->where('is_account_manager', 1)->firstOrFail(); // Fetch the account manager by ID
+    return view('layouts.dashboard.counselor.account-manager-details', compact('accountManager'));
+}
+
 }

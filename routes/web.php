@@ -204,3 +204,10 @@ Route::prefix('admin')->group(function () {
 Route::get('/manage-subscription', [SubscriptionPlanController::class, 'manage'])->name('admin.subscription-plans.manage');
 Route::post('/add-subscription', [SubscriptionPlanController::class, 'store'])->name('admin.subscription-plans.store');
 Route::post('/update-subscription', [SubscriptionPlanController::class, 'update'])->name('admin.subscription-plans.update');
+
+Route::get('/institute/{id}', [CounselorDashboardController::class, 'viewInstituteDetails'])->name('institute.details');
+Route::get('/account-manager/{id}', [CounselorDashboardController::class, 'viewAccountManagerDetails'])->name('accountManager.details');
+Route::middleware(['web'])->group(function () {
+    Route::get('/account-manager/{id}', [InstituteDashboardController::class, 'viewaccman'])->name('account-manager');
+    Route::get('/account-manager/{id}', [CounselorDashboardController::class, 'viewAccountManagerDetails'])->name('accountManager.details');
+});
